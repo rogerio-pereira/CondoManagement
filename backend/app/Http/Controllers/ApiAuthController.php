@@ -25,6 +25,7 @@ class ApiAuthController extends Controller
         $token->save();        
         
         return [
+            'user' => $user,
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(

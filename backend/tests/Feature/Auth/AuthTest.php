@@ -38,6 +38,11 @@ class AuthTest extends TestCase
 
         $request->assertOk()
             ->assertJsonStructure([
+                'user' => [
+                    'name',
+                    'email',
+                    'role',
+                ],
                 'access_token',
                 'token_type',
                 'expires_at',
