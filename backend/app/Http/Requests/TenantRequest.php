@@ -28,6 +28,7 @@ class TenantRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email',
+            'phone' => 'required',
             'password' => 'required|same:password_confirmation',
             'password_confirmation' => 'required',
         ];

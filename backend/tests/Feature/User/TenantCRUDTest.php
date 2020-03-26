@@ -33,12 +33,14 @@ class TenantCRUDTest extends TestCase
                     'id' => 3,  //First user is the admin
                     'name' => $tenant1->name,
                     'email' => $tenant1->email,
+                    'phone' => $tenant1->phone,
                     'role' => 'Tenant',
                 ],
                 [
                     'id' => 2,  //First user is the admin
                     'name' => $tenant2->name,
                     'email' => $tenant2->email,
+                    'phone' => $tenant2->phone,
                     'role' => 'Tenant',
                 ]
             ]);
@@ -62,6 +64,7 @@ class TenantCRUDTest extends TestCase
                     'id' => 2,  //First user is the admin
                     'name' => $tenant->name,
                     'email' => $tenant->email,
+                    'phone' => $tenant->phone,
                     'role' => 'Tenant',
                 ]
             );
@@ -91,6 +94,7 @@ class TenantCRUDTest extends TestCase
         $data = [
             'name' => 'Tenant 2',
             'email' => 'tenant@tenant.com',
+            'phone' => '(999) 999-9999',
             'password' => 'secret',
             'password_confirmation' => 'secret',
         ];
@@ -100,6 +104,7 @@ class TenantCRUDTest extends TestCase
             ->assertJson([
                 'id' => 2,
                 'name' => $data['name'],
+                'phone' => $data['phone'],
                 'email' => $data['email'],
                 'role' => 'Tenant',
             ]);
@@ -113,6 +118,7 @@ class TenantCRUDTest extends TestCase
         $data = [
             'name' => 'Tenant 2',
             'email' => 'tenant@tenant.com',
+            'phone' => '(999) 999-9999',
             'password' => 'secret',
             'password_confirmation' => 'secret',
         ];
@@ -123,6 +129,7 @@ class TenantCRUDTest extends TestCase
                 'id' => 1,
                 'name' => $data['name'],
                 'email' => $data['email'],
+                'phone' => $data['phone'],
                 'role' => 'Tenant',
             ]);
     }
@@ -135,6 +142,7 @@ class TenantCRUDTest extends TestCase
         $data = [
             'name' => '',
             'email' => '',
+            'phone' => '',
             'password' => '',
             'password_confirmation' => '',
         ];
@@ -148,6 +156,9 @@ class TenantCRUDTest extends TestCase
                     ],
                     'email' => [
                         'The email field is required.'
+                    ],
+                    'phone' => [
+                        'The phone field is required.'
                     ],
                     'password' => [
                         'The password field is required.'
@@ -167,6 +178,7 @@ class TenantCRUDTest extends TestCase
         $data = [
             'name' => 'Tenant',
             'email' => 'tenant',
+            'phone' => '(999) 999-9999',
             'password' => 'secret',
             'password_confirmation' => 'secret',
         ];
@@ -209,6 +221,7 @@ class TenantCRUDTest extends TestCase
         $data = [
             'name' => 'Tenant',
             'email' => 'tenant@tenant.com',
+            'phone' => '(999) 999-9999',
             'password' => 'secret',
             'password_confirmation' => 'secret2',
         ];
@@ -240,6 +253,7 @@ class TenantCRUDTest extends TestCase
                     'id' => 2,
                     'name' => $tenant->name,
                     'email' => $tenant->email,
+                    'phone' => $tenant->phone,
                     'role' => 'Tenant',
                 ]
             ]);
@@ -247,6 +261,7 @@ class TenantCRUDTest extends TestCase
         $data = [
             'name' => 'Tenant',
             'email' => 'tenant@tenant.com',
+            'phone' => '(999) 999-9999',
             'password' => 'secret',
             'password_confirmation' => 'secret',
         ];
@@ -257,6 +272,7 @@ class TenantCRUDTest extends TestCase
                     'id' => 2,
                     'name' => 'Tenant',
                     'email' => 'tenant@tenant.com',
+                    'phone' => '(999) 999-9999',
                     'role' => 'Tenant',
             ]);
 
@@ -268,6 +284,7 @@ class TenantCRUDTest extends TestCase
                     'id' => 2,
                     'name' => 'Tenant',
                     'email' => 'tenant@tenant.com',
+                    'phone' => '(999) 999-9999',
                     'role' => 'Tenant',
                 ]
             ]);
@@ -291,6 +308,7 @@ class TenantCRUDTest extends TestCase
         $data = [
             'name' => 'Tenant',
             'email' => 'tenant@tenant.com',
+            'phone' => '(999) 999-9999',
             'password' => 'secret',
             'password_confirmation' => 'secret',
         ];
@@ -317,6 +335,7 @@ class TenantCRUDTest extends TestCase
                 [
                     'id' => 2,  //First user is the admin
                     'name' => $tenant->name,
+                    'phone' => $tenant->phone,
                     'email' => $tenant->email,
                     'role' => 'Tenant',
                 ]
