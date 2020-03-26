@@ -6,6 +6,7 @@ use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TenantRequest;
+use App\Http\Requests\TenantEditRequest;
 
 class TenantController extends Controller
 {
@@ -84,10 +85,12 @@ class TenantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TenantRequest $request, $id)
+    public function update(TenantEditRequest $request, $id)
     {
         $data = $request->all();
-        $data['password'] = bcrypt($data['password']);
+        
+        if(isset($data['password']))
+            $data['password'] = bcrypt($data['password']);
 
         $tenant = $this->tenant->findOrFail($id);
         $tenant->update($data);

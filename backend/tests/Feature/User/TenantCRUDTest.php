@@ -293,6 +293,58 @@ class TenantCRUDTest extends TestCase
     /**
      * @test
      */
+    public function aAdminUserCanUpdateATenantWithoutPassword()
+    {
+        $this->withoutExceptionHandling();
+        $this->actingAs(factory(User::class)->create(['role' => 'Admin']), 'api');
+        $tenant = factory(User::class)->create();
+
+        $request = $this->get('api/tenants');
+        $request->assertOk()
+            ->assertJsonCount(1)
+            ->assertJson([
+                [
+                    'id' => 2,
+                    'name' => $tenant->name,
+                    'email' => $tenant->email,
+                    'phone' => $tenant->phone,
+                    'role' => 'Tenant',
+                ]
+            ]);
+
+        $data = [
+            'name' => 'Tenant',
+            'email' => 'tenant@tenant.com',
+            'phone' => '(999) 999-9999',
+        ];
+
+        $request = $this->put('api/tenants/2', $data);
+        $request->assertOk()
+            ->assertJson([
+                    'id' => 2,
+                    'name' => 'Tenant',
+                    'email' => 'tenant@tenant.com',
+                    'phone' => '(999) 999-9999',
+                    'role' => 'Tenant',
+            ]);
+
+        $request = $this->get('api/tenants');
+        $request->assertOk()
+            ->assertJsonCount(1)
+            ->assertJson([
+                [
+                    'id' => 2,
+                    'name' => 'Tenant',
+                    'email' => 'tenant@tenant.com',
+                    'phone' => '(999) 999-9999',
+                    'role' => 'Tenant',
+                ]
+            ]);
+    }
+
+    /**
+     * @test
+     */
     public function aAdminUserCanUpdateAUserThatIsNotTenant()
     {
         $this->actingAs(factory(User::class)->create(['role' => 'Admin']), 'api');
