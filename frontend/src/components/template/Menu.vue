@@ -10,6 +10,10 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                         <ul class="navbar-nav ml-auto mt-2 mt-lg-0"  v-if='this.$store.state.PassportApiToken.token'>
+                            <menu-admin v-if="this.$store.state.User.user.role == 'Admin'" />
+                            <menu-maitenance v-if="this.$store.state.User.user.role == 'Maintenance'" />
+                            <menu-tenant v-if="this.$store.state.User.user.role == 'Tenant'" />
+
                             <li class="nav-item">
                                 <a href='/' @click.prevent.stop='logout()' class='nav-link' title='Logout'>
                                     <!-- <i class="fas fa-sign-out-alt"></i> -->
@@ -38,15 +42,24 @@
 </template>
 
 <script>
+    import MenuAdmin from './MenuAdmin'
+    import MenuMaitenance from './MenuMaitenance'
+    import MenuTenant from './MenuTenant'
+
     export default {
+        components: {
+            MenuAdmin,
+            MenuMaitenance,
+            MenuTenant,
+        },
         data() {
             return {
-
             }
         },
         methods: {
             logout() {
                 this.$store.commit('setToken', null)
+                this.$store.commit('setUser', null)
                 this.$http.defaults.headers.common['Authorization'] = null
                 this.$router.push({ name: 'login'})
             }

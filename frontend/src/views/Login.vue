@@ -41,12 +41,13 @@
                 })
                 .then(response => {
                     const token = response.data.access_token
+                    const user = response.data.user
 
                     this.$store.commit('setToken', token)
+                    this.$store.commit('setUser', user)
                     this.$http.defaults.headers.common['Authorization'] = 'Bearer '+token
                     
                     this.$router.push({ name: 'home'})
-
                 }) 
                 .catch(error => {
                     console.log(error);

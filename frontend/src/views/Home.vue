@@ -3,7 +3,7 @@
     <div class="card">
         <div class='my-4'>
             <div class='container'>
-                <h1>Welcome</h1>
+                <h1>Welcome {{user.name}}</h1>
                 dasdas
             </div>
         </div>
@@ -15,6 +15,7 @@
     export default {
         data() {
             return {
+                user: this.$store.state.User.user
             }
         },
     }
