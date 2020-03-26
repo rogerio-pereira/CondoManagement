@@ -18,6 +18,7 @@ Route::post('/logout', 'ApiAuthController@logout');
 Route::get('/auth-user', 'ApiAuthController@AuthUser');
 
 Route::group(['middleware' => 'auth:api'], function () {
+    Route::resource('/users', 'UserController');
 });
 
 //The middleware auth:api is being used inside the controller on constructor, to ignore the store route

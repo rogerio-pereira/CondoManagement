@@ -48,4 +48,15 @@ class User extends Authenticatable
     {
         return $query->where('role', 'Tenant');
     }
+
+    /**
+     * Scope a query to only include tenant users.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUser($query)
+    {
+        return $query->where('role', '<>', 'Tenant');
+    }
 }
