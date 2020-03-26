@@ -47,6 +47,7 @@ class TenantController extends Controller
     public function store(TenantRequest $request)
     {
         $data = $request->all();
+        $data['password'] = bcrypt($data['password']);
 
         $tenant = $this->tenant->create($data);
         $tenant = $this->tenant->find($tenant->id);
@@ -86,6 +87,7 @@ class TenantController extends Controller
     public function update(TenantRequest $request, $id)
     {
         $data = $request->all();
+        $data['password'] = bcrypt($data['password']);
 
         $tenant = $this->tenant->findOrFail($id);
         $tenant->update($data);

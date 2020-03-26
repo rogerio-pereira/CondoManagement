@@ -8,12 +8,25 @@
                 </button>
 
                 <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode='out-in'>
-                    <div class="collapse navbar-collapse" id="navbar" v-if='this.$store.state.PassportApiToken.token'>
-                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0"  v-if='this.$store.state.PassportApiToken.token'>
                             <li class="nav-item">
                                 <a href='/' @click.prevent.stop='logout()' class='nav-link' title='Logout'>
                                     <i class="fas fa-sign-out-alt"></i>
                                 </a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0"  v-else>
+                            <li class="nav-item">
+                                <router-link to='/register' class='nav-link'>
+                                    Register
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to='/login' class='nav-link'>
+                                    Login
+                                </router-link>
                             </li>
                         </ul>
                     </div>

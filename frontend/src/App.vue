@@ -29,11 +29,13 @@
             }
         },
         created() {
-            if(this.$store.state.PassportApiToken.token) {
-                this.$http.defaults.headers.common['Authorization'] = 'Bearer '+this.$store.state.PassportApiToken.token
-            }
-            else {
-                this.$router.push({ name: 'login'})
+            if(this.$route.name != 'register') {
+                if(this.$store.state.PassportApiToken.token) {
+                    this.$http.defaults.headers.common['Authorization'] = 'Bearer '+this.$store.state.PassportApiToken.token
+                }
+                else {
+                    this.$router.push({ name: 'login'})
+                }
             }
         }
     }
