@@ -40,6 +40,7 @@
                     })
                     .catch(error => {
                         console.log('Error at saving\n'+error)
+                        this.errors = error.response.data.errors
                     })
             }
         }
