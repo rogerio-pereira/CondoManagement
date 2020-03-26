@@ -1,7 +1,7 @@
 <template>
     <span>
         <li class="nav-item">
-            Tenant
+            <router-link to='/tenants' class='nav-link'>Wont Work</router-link>
         </li>
     </span>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <span>
         <li class="nav-item">
-            Admin
+            <router-link to='/tenants' class='nav-link'>Tenants</router-link>
         </li>
     </span>
 </template>

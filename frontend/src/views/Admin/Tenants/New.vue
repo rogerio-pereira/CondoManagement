@@ -1,19 +1,17 @@
 <template>
-    <div class='col-md-8 offset-md-2 '>
-        <div class="card">
-            <div class="card-header">
-                Register
-            </div>
+    <div class='card'>
+        <div class="card-header">
+            <strong>New Tenant</strong>
+        </div>
 
-            <div class='card-body container p-4'>
-                <form-tenant :tenant='tenant' :errors='errors' @save='save($event.data)'/>
-            </div>
+        <div class='card-body container p-4'>
+            <form-tenant :tenant='tenant' :errors='errors' @save='save($event.data)'/>
         </div>
     </div>
 </template>
 
 <script>
-    import FormTenant from '../views/Admin/Tenants/Form'
+    import FormTenant from './Form'
 
     export default {
         components: {
@@ -22,19 +20,21 @@
         data() {
             return {
                 tenant: {
+                    id: null,
                     name: '',
                     email: '',
+                    phone: '',
                     password: '',
                     password_confirmation: '',
                 },
-                errors: '',
+                errors: {}
             }
         },
         methods: {
             save(data) {
                 this.$http.post('tenants', data)
                     .then(() => {
-                        this.$router.push({ name: 'login'})
+                        this.$router.push({ name: 'tenants.index'})
                     })
                     .catch(error => {
                         console.log(error.response)
