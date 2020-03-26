@@ -6,6 +6,18 @@
                 <button class="navbar-toggler btn btn-light" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
+
+                <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode='out-in'>
+                    <div class="collapse navbar-collapse" id="navbar" v-if='this.$store.state.PassportApiToken.token'>
+                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                            <li class="nav-item">
+                                <a href='/' @click.prevent.stop='logout()' class='nav-link' title='Logout'>
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </transition>
             </nav>
         </div>
     </div>     
@@ -24,7 +36,7 @@
                 this.$http.defaults.headers.common['Authorization'] = null
                 this.$router.push({ name: 'login'})
             }
-        }
+        },
     }
 </script>
 
@@ -38,15 +50,16 @@
         z-index: 10;
     }
 
-    .navbar a
+    .navbar a,
+    .navbar li a
     {
-        color:black;
-
-        font-size: 1.2em;
+        color:white;
+        font-size: 1em;
     }
 
-    .navbar a:hover{
-        color:white;
+    .navbar a:hover,
+    .navbar li a:hover{
+        color: white;
         text-decoration: underline;
     }
 

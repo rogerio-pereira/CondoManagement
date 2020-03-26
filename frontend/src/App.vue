@@ -41,7 +41,7 @@
 
 <style>
     * {
-        font-family: 'Open Sans Condensed', sans-serif;
+        font-family: 'Lato', sans-serif;
     }
 
     body {

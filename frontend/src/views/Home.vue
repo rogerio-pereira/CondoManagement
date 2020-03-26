@@ -1,9 +1,12 @@
 <template>
 <div>
-    <h1 class='mt-3 mb-5'>Welcome</h1>
-
-    <div class='row'>
-        
+    <div class="card">
+        <div class='my-4'>
+            <div class='container'>
+                <h1>Welcome</h1>
+                dasdas
+            </div>
+        </div>
     </div>
 </div>
 </template>
