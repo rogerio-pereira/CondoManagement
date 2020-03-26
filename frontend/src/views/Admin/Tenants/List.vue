@@ -32,7 +32,7 @@
                     <td>{{tenant.id}}</td>
                     <td>{{tenant.name}}</td>
                     <td><a :href="'mailto:'+tenant.email">{{tenant.email}}</a></td>
-                    <!-- <td><a :href="'tel:'+tenant.phone">{{tenant.phone}}</a></td> -->
+                    <td><a :href="'tel:'+tenant.phone">{{tenant.phone}}</a></td>
                 </tr>
             </tbody>
         </table>
