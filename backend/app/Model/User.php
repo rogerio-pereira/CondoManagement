@@ -59,4 +59,14 @@ class User extends Authenticatable
     {
         return $query->where('role', '<>', 'Tenant');
     }
+
+    public function apartment()
+    {
+        return $this->hasOne(Apartment::class, 'tenant_id');
+    }
+
+    public function isTenant()
+    {
+        return $this->role == 'Tenant';
+    }
 }

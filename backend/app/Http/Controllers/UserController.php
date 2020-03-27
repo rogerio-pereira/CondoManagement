@@ -14,8 +14,6 @@ class UserController extends Controller
 
     public function __construct(User $user)
     {
-        $this->middleware('auth:api')->except(['store']);
-
         $this->user = $user->user();
     }
 
@@ -107,7 +105,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = $this->user->findOrFail($id);
+        $apartment = $user->apartment;
         $user->delete();
+
+        if($apartment)
+            $apartment->update(['occupied' => false, 'tenant_id' => null]);
 
         return [];
     }

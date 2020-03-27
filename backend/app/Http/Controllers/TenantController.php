@@ -107,7 +107,11 @@ class TenantController extends Controller
     public function destroy($id)
     {
         $tenant = $this->tenant->findOrFail($id);
+        $apartment = $tenant->apartment;
         $tenant->delete();
+
+        if($apartment)
+            $apartment->update(['occupied' => false, 'tenant_id' => null]);
 
         return [];
     }
