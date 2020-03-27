@@ -12,8 +12,22 @@ class ApartmentsTableSeeder extends Seeder
      */
     public function run()
     {
-        //Amin
-        for($i=0; $i<10; $i++)
-            factory(Apartment::class)->create(['name' => $i]);
+        for($i=1; $i<=10; $i++) {
+            if($i<=5) {
+                $data = [
+                    'name' => $i,
+                    'occupied' => true,
+                    'tenant_id' => $i
+                ];
+            }
+            else {
+                $data = [
+                    'name' => $i,
+                    'occupied' => false,
+                ];
+            }
+
+            factory(Apartment::class)->create($data);
+        }
     }
 }
