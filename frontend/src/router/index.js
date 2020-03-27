@@ -10,6 +10,11 @@ import TenantList from '../views/Admin/Tenants/List.vue'
 import TenantNew from '../views/Admin/Tenants/New.vue'
 import TenantEdit from '../views/Admin/Tenants/Edit.vue'
 
+import EmployeeIndex from '../views/Admin/Employees/Index.vue'
+import EmployeeList from '../views/Admin/Employees/List.vue'
+import EmployeeNew from '../views/Admin/Employees/New.vue'
+import EmployeeEdit from '../views/Admin/Employees/Edit.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -35,6 +40,15 @@ const routes = [
       {path: '', component: TenantList, props: true, name: 'tenants.index'},
       {path: 'new', component: TenantNew, props: true, name: 'tenants.new'},
       {path: 'edit/:id', component: TenantEdit, props: true, name: 'tenants.edit'},
+    ]
+  },
+  {
+    path: '/employees',
+    component: EmployeeIndex,
+    children: [
+      {path: '', component: EmployeeList, props: true, name: 'employees.index'},
+      {path: 'new', component: EmployeeNew, props: true, name: 'employees.new'},
+      {path: 'edit/:id', component: EmployeeEdit, props: true, name: 'employees.edit'},
     ]
   },
 ]
