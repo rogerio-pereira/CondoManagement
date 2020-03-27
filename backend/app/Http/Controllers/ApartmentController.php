@@ -59,8 +59,7 @@ class ApartmentController extends Controller
      */
     public function show($id)
     {
-        $apartment = Apartment::findOrFail($id);
-        return $apartment->with('tenant')->get()->first();
+        return Apartment::with('tenant')->findOrFail($id);
     }
 
     /**

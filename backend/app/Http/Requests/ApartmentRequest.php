@@ -29,7 +29,7 @@ class ApartmentRequest extends FormRequest
             'name' => 'required',
             'price' => 'required|numeric',
             'occupied' => 'required|boolean',
-            'tenant_id' => 'required_if:occupied,true|numeric|exists:users,id',
+            'tenant_id' => 'nullable|required_if:occupied,true|numeric|exists:users,id',
         ];
     }
     

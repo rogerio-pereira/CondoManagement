@@ -17,7 +17,7 @@ class ApartmentsTableSeeder extends Seeder
                 $data = [
                     'name' => $i,
                     'occupied' => true,
-                    'tenant_id' => $i
+                    'tenant_id' => $i+9 //There is other 9 users
                 ];
             }
             else {

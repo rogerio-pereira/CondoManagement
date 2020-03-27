@@ -19,8 +19,8 @@ Route::get('/auth-user', 'ApiAuthController@AuthUser');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('/users', 'UserController');
-    Route::resource('/apartments', 'ApartmentController');
 });
+Route::resource('/apartments', 'ApartmentController');
 
 //The middleware auth:api is being used inside the controller on constructor, to ignore the store route
 //A teenant can be created outside from the system
