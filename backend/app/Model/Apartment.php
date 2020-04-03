@@ -21,4 +21,16 @@ class Apartment extends Model
     {
         return $this->belongsTo(User::class, 'tenant_id');
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function setTenant($tenant_id = null)
+    {
+        $this->occupied = isset($tenant_id);
+        $this->tenant_id = $tenant_id;
+        $this->save();
+    }
 }

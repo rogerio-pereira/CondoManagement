@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Model\User;
+use App\Model\Payment;
 use App\Model\Apartment;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ApartmentRequest;
-use App\Http\Requests\ApartmentEditRequest;
+use App\Model\Useful\DateConversion;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PaymentRequest;
 
-class ApartmentController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +20,11 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        return Apartment::orderBy('name')->with('tenant')->get();
+        if(Auth::user()->role == 'Tenant') {
+            return Payment::where('tenant_id', Auth::user()->id)->get();
+        }
+
+        return Payment::all();
     }
 
     /**
@@ -37,17 +43,30 @@ class ApartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ApartmentRequest $request)
+    public function store(PaymentRequest $request)
     {
         $data = $request->all();
 
-        if(isset($data['tenant_id']))
-            User::validateTenant($data['tenant_id']);
+        User::validateTenant($data['tenant_id']);
 
-        $apartment = Apartment::create($data);
-        $apartment = $apartment->find($apartment->id)->with('tenant')->get();
+        $apartment = Apartment::find($data['apartment_id']);
+        $apartment->setTenant($data['tenant_id']);
 
-        return response()->json($apartment->first(), 201);
+        $data['value'] = $apartment->price;
+        $data['due_at'] = Carbon::createFromFormat('Y-m-d', $data['start_date'])->startOfMonth()->toDateString();
+
+        for($i=0; $i<$data['installments']; $i++) {
+            Payment::create($data);
+            $data['due_at'] = DateConversion::newDateByPeriod($data['due_at'], 'Monthly')->toDateString();
+        }
+
+        $payments = Payment::where('apartment_id', $data['apartment_id'])
+                        ->where('tenant_id', $data['tenant_id'])
+                        ->with('apartment')
+                        ->with('tenant')
+                        ->get();
+
+        return response()->json($payments, 201);
     }
 
     /**
@@ -58,7 +77,7 @@ class ApartmentController extends Controller
      */
     public function show($id)
     {
-        return Apartment::with('tenant')->findOrFail($id);
+        //
     }
 
     /**
@@ -79,20 +98,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ApartmentRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = $request->all();
-
-        if($data['occupied'] == false)
-            $data['tenant_id'] = null;
-
-        if(isset($data['tenant_id']))
-            User::validateTenant($data['tenant_id']);
-
-        $apartment = Apartment::findOrFail($id);
-        $apartment->update($data);
-
-        return Apartment::find($id)->with('tenant')->get()->first();
+        //
     }
 
     /**
@@ -103,9 +111,6 @@ class ApartmentController extends Controller
      */
     public function destroy($id)
     {
-        $apartment = Apartment::findOrFail($id);
-        $apartment->delete();
-
-        return [];
+        //
     }
 }
