@@ -3,6 +3,9 @@
         <li class="nav-item">
             <router-link to='/tenants' class='nav-link'>Wont Work</router-link>
         </li>
+        <li class="nav-item">
+            <router-link to='/payments' class='nav-link'>Payments</router-link>
+        </li>
 
         <li class="nav-item">
             <a href='/' @click.prevent.stop='logout()' class='nav-link' title='Logout'>

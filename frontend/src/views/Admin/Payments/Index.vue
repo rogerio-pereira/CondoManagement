@@ -9,7 +9,7 @@
 <script>
     export default {
         created() {
-            if(this.$store.state.User.user.role != 'Admin')
+            if(this.$store.state.User.user.role == 'Maintenance')
                 this.$router.push({ name: 'home'})
         }
     }
