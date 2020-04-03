@@ -33,4 +33,9 @@ class Apartment extends Model
         $this->tenant_id = $tenant_id;
         $this->save();
     }
+
+    public function maintenances()
+    {
+        return $this->hasMany(Maintenance::class);
+    }
 }

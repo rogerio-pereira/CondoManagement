@@ -85,4 +85,12 @@ class User extends Authenticatable
             throw new HttpResponseException(response()->json(['errors' => $errors], 422));
         }
     }
+
+    public function maintenances()
+    {
+        if($this->role == 'Maintenance')
+            return $this->hasMany(Maintenance::class, 'maintenance_user_id', 'id');
+        else if($this->role == 'Tenant')
+            return $this->hasMany(Maintenance::class, 'tenant_id', 'id');
+    }
 }
