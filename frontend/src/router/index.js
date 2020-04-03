@@ -20,6 +20,11 @@ import ApartmentList from '../views/Admin/Apartments/List.vue'
 import ApartmentNew from '../views/Admin/Apartments/New.vue'
 import ApartmentEdit from '../views/Admin/Apartments/Edit.vue'
 
+import PaymentIndex from '../views/Admin/Payments/Index.vue'
+import PaymentList from '../views/Admin/Payments/List.vue'
+import PaymentNew from '../views/Admin/Payments/New.vue'
+import PaymentEdit from '../views/Admin/Payments/Edit.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -63,6 +68,15 @@ const routes = [
       {path: '', component: ApartmentList, props: true, name: 'apartments.index'},
       {path: 'new', component: ApartmentNew, props: true, name: 'apartments.new'},
       {path: 'edit/:id', component: ApartmentEdit, props: true, name: 'apartments.edit'},
+    ]
+  },
+  {
+    path: '/payments',
+    component: PaymentIndex,
+    children: [
+      {path: '', component: PaymentList, props: true, name: 'payments.index'},
+      {path: 'new', component: PaymentNew, props: true, name: 'payments.new'},
+      {path: 'edit/:id', component: PaymentEdit, props: true, name: 'payments.edit'},
     ]
   },
 ]

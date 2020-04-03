@@ -74,6 +74,7 @@ class PaymentTest extends TestCase
      */
     public function AAdminUserCanGetAllPayments()
     {
+        $this->withoutExceptionHandling();
         $this->actingAs($this->user, 'api');
         $this->createPayments();
 

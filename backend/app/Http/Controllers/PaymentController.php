@@ -21,10 +21,10 @@ class PaymentController extends Controller
     public function index()
     {
         if(Auth::user()->role == 'Tenant') {
-            return Payment::where('tenant_id', Auth::user()->id)->get();
+            return Payment::where('tenant_id', Auth::user()->id)->with('apartment')->with('tenant')->get();
         }
 
-        return Payment::all();
+        return Payment::with('apartment')->with('tenant')->get();
     }
 
     /**
