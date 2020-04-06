@@ -1,8 +1,8 @@
 <template>
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0"  v-if='this.$store.state.PassportApiToken.token'>
-        <!-- <li class="nav-item">
+        <li class="nav-item">
             <router-link to='/tenants' class='nav-link'>Wont Work</router-link>
-        </li> -->
+        </li>
         <li class="nav-item">
             <router-link to='/payments' class='nav-link'>Payments</router-link>
         </li>

@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('/apartments', 'ApartmentController');
     Route::resource('/payments', 'PaymentController');
     Route::resource('/maintenance', 'MaintenanceController');
+    Route::put('/maintenance/{id}/solved', 'MaintenanceController@solved');
 });
 
 //The middleware auth:api is being used inside the controller on constructor, to ignore the store route
